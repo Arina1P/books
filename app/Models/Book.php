@@ -48,7 +48,7 @@ class Book extends Model
     public static function getReader(?int $id)
     {
         $book = Book::find($id);
-        $user = $book->users()->latest('issued')->first();
+        $user = $book?->users()?->latest('issued')?->first();
         $reader = '';
         if ($user->pivot->issued ?? '' && !$user->pivot->returned) {
             $reader = $user->name;

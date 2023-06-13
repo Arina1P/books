@@ -144,6 +144,7 @@ class BookEditScreen extends Screen
     public function save(CreateBook $action)
     {
         $data = \request()->get('book');
+        $data['genres'] = \request()->get('genres');
 
         try {
             ($action)(new BookCreateDTO($data));
