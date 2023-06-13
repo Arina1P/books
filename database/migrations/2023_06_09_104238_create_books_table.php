@@ -17,7 +17,7 @@ class CreateBooksTable extends Migration
             $table->id();
             $table->string('title');
             $table->integer('author_id')->nullable();
-            $table->timestamp('release_date');
+            $table->timestamp('release_date')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

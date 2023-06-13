@@ -116,22 +116,32 @@ Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('pla
 
 
 // Platform > System > Books
-Route::screen('books', \App\Orchid\Screens\Book\BookListScreen::class)->name('platform.system.books');
+Route::screen('books', \App\Orchid\Screens\Book\BookListScreen::class)->name('platform.system.books')
+->breadcrumbs(function (Trail $trail) {
+    return $trail
+        ->parent('platform.index')
+        ->push(__('books'), route('platform.system.books'));
+});
 
+Route::screen('books/create', \App\Orchid\Screens\Book\BookEditScreen::class)
+    ->name('platform.books.create')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.system.books')
+            ->push(__('create'), route('platform.books.create'));
+    });
 
-// Platform > System > Inventories > Create
-//Route::screen('Books/create', \App\Orchid\Screens\Book\BookEditScreen::class)
-//    ->name('platform.Books.create')
-//    ->breadcrumbs(fn(Trail $trail) => $trail
-//        ->parent('platform.systems.Books')
-//        ->push(__('Create'), route('platform.Books.create')));
+Route::screen('books/edit/{book}', \App\Orchid\Screens\Book\BookEditScreen::class)
+    ->name('platform.book.edit')
+    ->breadcrumbs(fn(Trail $trail, $book) => $trail
+        ->parent('platform.system.books')
+        ->push(__('edit'), route('platform.book.edit', $book)));
 
-// Platform > System > Inventories > Edit
-//Route::screen('Books/edit/{Book}', \App\Orchid\Screens\Book\BookEditScreen::class)
-//    ->name('platform.Books.edit')
-//    ->breadcrumbs(fn(Trail $trail, $Book) => $trail
-//        ->parent('platform.systems.Books')
-//        ->push(__('Edit'), route('platform.Books.edit', $Book)));
+Route::screen('books/issue/{book}', \App\Orchid\Screens\Book\BookIssueScreen::class)
+    ->name('platform.books.issue')
+    ->breadcrumbs(fn(Trail $trail, $book) => $trail
+        ->parent('platform.system.books')
+        ->push(__('Issue'), route('platform.books.issue', $book)));
 
 // Platform > System > Authors
 Route::screen('authors', \App\Orchid\Screens\Author\AuthorListScreen::class)->name('platform.system.authors')

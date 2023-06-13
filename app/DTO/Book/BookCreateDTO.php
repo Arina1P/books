@@ -6,7 +6,8 @@ use Spatie\DataTransferObject\DataTransferObject;
 
 class BookCreateDTO extends DataTransferObject
 {
-    public string $title;
-    public string $author_id;
-    public string $release_date;
+    public ?string $title;
+    public ?string $author_id;
+    public ?array $genres;
+    public ?string $release_date;
 }

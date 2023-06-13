@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\Orchid\Screens\Book;
 
 use App\Models\Book;
-use Illuminate\Http\Request;
+use Orchid\Screen\Actions\DropDown;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Repository;
 use Orchid\Screen\Screen;
 use Orchid\Screen\TD;
@@ -24,12 +25,14 @@ class BookListScreen extends Screen
         $books = Book::all();
 
         $books->map(function ($item) use (&$table) {
+            $reader = Book::getReader($item->id);
             return $table[] = new Repository([
                 'id' => $item->id,
                 'title' => $item->title,
                 'created_at' => $item->created_at,
                 'author' => $item->author->name,
                 'genres' => $item->genres()->pluck('title')->implode(', '),
+                'reader' => $reader,
             ]);
         })->toArray();
 
@@ -74,9 +77,9 @@ class BookListScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-//            Link::make(__('Add'))
-//                ->icon('plus')
-//                ->route('platform.systems.books.create'),
+            Link::make(__('Add'))
+                ->icon('plus')
+                ->route('platform.books.create'),
         ];
     }
 
@@ -112,23 +115,26 @@ class BookListScreen extends Screen
                     ->render(function (Repository $model) {
                         return $model->get('genres');
                     }),
+
+                TD::make('reader', 'Читатель')
+                    ->width('150')
+                    ->render(function (Repository $model) {
+                        return $model->get('reader');
+                    }),
+
+                TD::make(__('Actions'))->width('50')
+                    ->align(TD::ALIGN_CENTER)
+                    ->width('10px')
+                    ->render(fn(Repository $model) => DropDown::make()
+                        ->icon('options-vertical')
+                        ->list([
+                            Link::make(__('Редактирование'))
+                                ->route('platform.book.edit', $model->get('id'))
+                                ->icon('pencil'),
+                        ])
+                    ),
             ])
 
         ];
-    }
-
-    /**
-     * @param Request $request
-     * @param Book $Book
-     */
-    public function saveBook(Request $request, Book $Book): void
-    {
-    }
-
-    /**
-     * @param Request $request
-     */
-    public function remove(Request $request): void
-    {
     }
 }

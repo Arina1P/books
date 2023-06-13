@@ -10,8 +10,12 @@ class CreateBook
     public function __invoke(BookCreateDTO $dto)
     {
         $data = $dto->toArray();
-        $Book = Book::create($data);
+        $book = Book::create($data);
 
-        return $Book->refresh();
+        foreach ($data['genres'] as $genre) {
+            $book->genres()->attach($genre);
+        }
+
+        return $book->refresh();
     }
 }

@@ -21,6 +21,7 @@ class Book extends Model
         'id',
         'title',
         'author_id',
+        'release_date',
     ];
 
     public function genres(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -31,5 +32,28 @@ class Book extends Model
     public function author(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->BelongsTo(Author::class);
+    }
+
+    public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(User::class)->withPivot('issued', 'returned');
+    }
+
+    /**
+     * @param ?int $id
+     *
+     * @return string
+     */
+
+    public static function getReader(?int $id)
+    {
+        $book = Book::find($id);
+        $user = $book->users()->latest('issued')->first();
+        $reader = '';
+        if ($user->pivot->issued ?? '' && !$user->pivot->returned) {
+            $reader = $user->name;
+        }
+
+        return $reader;
     }
 }

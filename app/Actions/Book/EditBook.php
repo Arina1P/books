@@ -1,17 +1,19 @@
 <?php
-namespace App\Actions\Genre;
+namespace App\Actions\Book;
 
-use App\DTO\Genre\GenreCreateDTO;
-use App\Models\Genre;
+use App\DTO\Book\BookCreateDTO;
+use App\Models\Book;
 
 class EditBook
 {
-    public function __invoke(GenreCreateDTO $dto, $id)
+    public function __invoke(BookCreateDTO $dto, $id)
     {
         $data = $dto->toArray();
-        $genre = Genre::find($id);
-        $genre->update($data);
+        $book = Book::find($id);
+        $book->update($data);
 
-        return $genre->refresh();
+        $book->genres()->sync($data['genres']);
+
+        return $book->refresh();
     }
 }
