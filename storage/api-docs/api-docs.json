@@ -1,0 +1,360 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Your super  ApplicationAPI",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/author/create": {
+            "post": {
+                "tags": [
+                    "Author"
+                ],
+                "summary": "Создание",
+                "description": "Create author",
+                "operationId": "6d804258b6b7b5aacb685611a4f84565",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Имя"
+                        }
+                    },
+                    {
+                        "name": "surname",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Фамилия"
+                        }
+                    },
+                    {
+                        "name": "birth_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "Дата рождения"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/author/edit/{id}": {
+            "patch": {
+                "tags": [
+                    "Author"
+                ],
+                "summary": "Редактирование",
+                "description": "Edit Author",
+                "operationId": "94c1ba36f51b8ee8f3714686e264e1b6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "int",
+                            "example": "Id автора"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Имя"
+                        }
+                    },
+                    {
+                        "name": "surname",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Фамилия"
+                        }
+                    },
+                    {
+                        "name": "birth_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "Дата рождения"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/author/remove/{id}": {
+            "delete": {
+                "tags": [
+                    "Author"
+                ],
+                "summary": "Удаление",
+                "description": "Remove author",
+                "operationId": "2c0fdcf3496c0f170c72611d120d3669",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "int",
+                            "example": "Id автора"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/book/create": {
+            "post": {
+                "tags": [
+                    "Book"
+                ],
+                "summary": "Создание",
+                "description": "Create book",
+                "operationId": "9a66d35682dbaa0a89e884a5784b0f06",
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Название"
+                        }
+                    },
+                    {
+                        "name": "author_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "int",
+                            "example": "Id автора"
+                        }
+                    },
+                    {
+                        "name": "genres",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "json",
+                            "example": "Id жанров"
+                        }
+                    },
+                    {
+                        "name": "release_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "Дата публикации"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/book/edit/{id}": {
+            "patch": {
+                "tags": [
+                    "Book"
+                ],
+                "summary": "Редактирование",
+                "description": "Edit book",
+                "operationId": "cb7e03ef6901d542825cfc623b3aa041",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "1"
+                        }
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Название"
+                        }
+                    },
+                    {
+                        "name": "author_id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "int",
+                            "example": "Id автора"
+                        }
+                    },
+                    {
+                        "name": "genres",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "json",
+                            "example": "Id жанров"
+                        }
+                    },
+                    {
+                        "name": "release_date",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "Дата публикации"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/book/remove/{id}": {
+            "delete": {
+                "tags": [
+                    "Book"
+                ],
+                "summary": "Удаление",
+                "description": "Remove book",
+                "operationId": "b4067d1ccb4d73789e659e689d7910df",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "int",
+                            "example": "Id книги"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/genre/create": {
+            "post": {
+                "tags": [
+                    "Genre"
+                ],
+                "summary": "Создание",
+                "description": "Create genre",
+                "operationId": "0812a4299a636b400e2cf7a5210ca1be",
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Название"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/genre/edit/{id}": {
+            "patch": {
+                "tags": [
+                    "Genre"
+                ],
+                "summary": "Редактирование",
+                "description": "Edit genre",
+                "operationId": "543adfe6e91bff9eab02caac97f3ef8a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "int",
+                            "example": "Id автора"
+                        }
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "Название"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/api/genre/remove/{id}": {
+            "delete": {
+                "tags": [
+                    "Genre"
+                ],
+                "summary": "Удаление",
+                "description": "Remove genre",
+                "operationId": "57c6f48766a204436d81afc7b5cfffa7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "int",
+                            "example": "Id жанра"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        }
+    }
+}
