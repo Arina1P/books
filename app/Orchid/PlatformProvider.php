@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Orchid;
 
+use App\Models\Author;
+use App\Models\Book;
+use App\Models\Genre;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
 use Orchid\Screen\Actions\Menu;
-use Orchid\Support\Color;
 
 class PlatformProvider extends OrchidServiceProvider
 {
@@ -28,60 +30,36 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerMainMenu(): array
     {
         return [
-            Menu::make('Example screen')
-                ->icon('monitor')
-                ->route('platform.example')
-                ->title('Navigation')
+            Menu::make(__('Books'))
+                ->icon('book-open')
+                ->route('platform.system.books')
                 ->badge(function () {
-                    return 6;
+                    return Book::count();
+                })
+                ->title('Library'),
+
+            Menu::make(__('Authors'))
+                ->icon('user')
+                ->route('platform.system.authors')
+                ->badge(function () {
+                    return Author::count();
                 }),
 
-            Menu::make('Dropdown menu')
-                ->icon('code')
-                ->list([
-                    Menu::make('Sub element item 1')->icon('bag'),
-                    Menu::make('Sub element item 2')->icon('heart'),
-                ]),
-
-            Menu::make('Basic Elements')
-                ->title('Form controls')
-                ->icon('note')
-                ->route('platform.example.fields'),
-
-            Menu::make('Advanced Elements')
-                ->icon('briefcase')
-                ->route('platform.example.advanced'),
-
-            Menu::make('Text Editors')
-                ->icon('list')
-                ->route('platform.example.editors'),
-
-            Menu::make('Overview layouts')
-                ->title('Layouts')
-                ->icon('layers')
-                ->route('platform.example.layouts'),
-
-            Menu::make('Chart tools')
-                ->icon('bar-chart')
-                ->route('platform.example.charts'),
-
-            Menu::make('Cards')
-                ->icon('grid')
-                ->route('platform.example.cards')
-                ->divider(),
-
-            Menu::make('Documentation')
-                ->title('Docs')
-                ->icon('docs')
-                ->url('https://orchid.software/en/docs'),
-
-            Menu::make('Changelog')
-                ->icon('shuffle')
-                ->url('https://github.com/orchidsoftware/platform/blob/master/CHANGELOG.md')
-                ->target('_blank')
+            Menu::make(__('Genres'))
+                ->icon('user')
+                ->route('platform.system.genres')
                 ->badge(function () {
-                    return Dashboard::version();
-                }, Color::DARK()),
+                    return Genre::count();
+                }),
+
+//            Menu::make('Text Editors')
+//                ->icon('list')
+//                ->route('platform.example.editors'),
+
+//            Menu::make('Documentation')
+//                ->title('Docs')
+//                ->icon('docs')
+//                ->url('https://orchid.software/en/docs'),
 
             Menu::make(__('Users'))
                 ->icon('user')
@@ -89,10 +67,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->permission('platform.systems.users')
                 ->title(__('Access rights')),
 
-            Menu::make(__('Roles'))
-                ->icon('lock')
-                ->route('platform.systems.roles')
-                ->permission('platform.systems.roles'),
+//            Menu::make(__('Roles'))
+//                ->icon('lock')
+//                ->route('platform.systems.roles')
+//                ->permission('platform.systems.roles'),
         ];
     }
 

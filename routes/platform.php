@@ -113,3 +113,76 @@ Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.exampl
 Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
 
 //Route::screen('idea', 'Idea::class','platform.screens.idea');
+
+
+// Platform > System > Books
+Route::screen('books', \App\Orchid\Screens\Book\BookListScreen::class)->name('platform.system.books')
+->breadcrumbs(function (Trail $trail) {
+    return $trail
+        ->parent('platform.index')
+        ->push(__('books'), route('platform.system.books'));
+});
+
+Route::screen('books/create', \App\Orchid\Screens\Book\BookEditScreen::class)
+    ->name('platform.books.create')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.system.books')
+            ->push(__('create'), route('platform.books.create'));
+    });
+
+Route::screen('books/edit/{book}', \App\Orchid\Screens\Book\BookEditScreen::class)
+    ->name('platform.book.edit')
+    ->breadcrumbs(fn(Trail $trail, $book) => $trail
+        ->parent('platform.system.books')
+        ->push(__('edit'), route('platform.book.edit', $book)));
+
+Route::screen('books/issue/{book}', \App\Orchid\Screens\Book\BookIssueScreen::class)
+    ->name('platform.books.issue')
+    ->breadcrumbs(fn(Trail $trail, $book) => $trail
+        ->parent('platform.system.books')
+        ->push(__('Issue'), route('platform.books.issue', $book)));
+
+// Platform > System > Authors
+Route::screen('authors', \App\Orchid\Screens\Author\AuthorListScreen::class)->name('platform.system.authors')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.index')
+            ->push(__('genres'), route('platform.system.genres'));
+    });
+
+Route::screen('authors/create', \App\Orchid\Screens\Author\AuthorEditScreen::class)
+    ->name('platform.authors.create')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.system.authors')
+            ->push(__('create'), route('platform.authors.create'));
+    });
+
+Route::screen('authors/edit/{author}', \App\Orchid\Screens\Author\AuthorEditScreen::class)
+    ->name('platform.author.edit')
+    ->breadcrumbs(fn(Trail $trail, $author) => $trail
+        ->parent('platform.system.authors')
+        ->push(__('edit'), route('platform.author.edit', $author)));
+
+// Platform > System > Genres
+Route::screen('genres', \App\Orchid\Screens\Genre\GenreListScreen::class)->name('platform.system.genres')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.index')
+            ->push(__('genres'), route('platform.system.genres'));
+    });
+
+Route::screen('genres/create', \App\Orchid\Screens\Genre\GenreEditScreen::class)
+    ->name('platform.genres.create')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.system.genres')
+            ->push(__('create'), route('platform.genres.create'));
+    });
+
+Route::screen('genres/edit/{genre}', \App\Orchid\Screens\Genre\GenreEditScreen::class)
+    ->name('platform.genre.edit')
+    ->breadcrumbs(fn(Trail $trail, $genre) => $trail
+        ->parent('platform.system.genres')
+        ->push(__('edit'), route('platform.genre.edit', $genre)));

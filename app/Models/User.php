@@ -63,4 +63,9 @@ class User extends Authenticatable
         'updated_at',
         'created_at',
     ];
+
+    public function books(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Book::class);
+    }
 }
